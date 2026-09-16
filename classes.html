@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>English Courses - Classes</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-size: 18px;
+            color: #6b7280;
+        }
+
+        .classes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .class-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #1f2937;
+            border: 1px solid #e5e7eb;
+            transition: 0.2s;
+        }
+
+        .class-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .class-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .class-card h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .class-card p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .logout {
+            display: block;
+            text-align: center;
+            margin-top: 40px;
+            color: #6b7280;
+            text-decoration: none;
+        }
+
+        .logout:hover {
+            color: #1f2937;
+        }
+
+        @media (max-width: 700px) {
+            .classes {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            header h1 {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .classes {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>Choose your class 📚</h1>
+            <p>Select your class to access your English courses.</p>
+        </header>
+
+        <div class="classes">
+
+            <a href="6e.html" class="class-card">
+                <div class="class-icon">🎒</div>
+                <h2>6e</h2>
+                <p>English courses</p>
+            </a>
+
+            <a href="5e.html" class="class-card">
+                <div class="class-icon">📘</div>
+                <h2>5e</h2>
+                <p>English courses</p>
+            </a>
+
+            <a href="4e.html" class="class-card">
+                <div class="class-icon">📗</div>
+                <h2>4e</h2>
+                <p>English courses</p>
+            </a>
+
+            <a href="3e.html" class="class-card">
+                <div class="class-icon">📕</div>
+                <h2>3e</h2>
+                <p>English courses</p>
+            </a>
+
+            <a href="2nde.html" class="class-card">
+                <div class="class-icon">🎓</div>
+                <h2>2nde</h2>
+                <p>English courses</p>
+            </a>
+
+            <a href="1ere.html" class="class-card">
+                <div class="class-icon">🎓</div>
+                <h2>1ère</h2>
+                <p>English courses</p>
+            </a>
+
+            <a href="terminale-generale.html" class="class-card">
+                <div class="class-icon">🎓</div>
+                <h2>Terminale Générale</h2>
+                <p>English courses</p>
+            </a>
+
+            <a href="terminale-techno.html" class="class-card">
+                <div class="class-icon">💻</div>
+                <h2>Terminale Technologique</h2>
+                <p>English courses</p>
+            </a>
+
+            <a href="terminale-pro.html" class="class-card">
+                <div class="class-icon">🛠️</div>
+                <h2>Terminale Professionnelle</h2>
+                <p>English courses</p>
+            </a>
+
+        </div>
+
+        <a href="index.html" class="logout">
+            ← Back to login
+        </a>
+
+    </div>
+
+</body>
+</html>
