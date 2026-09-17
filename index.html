@@ -1,139 +1,459 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Courses</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  <title>English Courses</title>
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f7fb;
-            color: #1f2937;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+    body {
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      background: #080014;
+    }
 
-        header {
-            text-align: center;
-            padding: 50px 20px;
-        }
+    /* =========================
+       MOLTEN METAL BACKGROUND
+    ========================= */
 
-        h1 {
-            font-size: 42px;
-            margin-bottom: 15px;
-        }
+    .background {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 20% 30%,
+          rgba(82, 39, 255, 0.9),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 80% 70%,
+          rgba(255, 159, 252, 0.8),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 50% 50%,
+          rgba(255, 255, 255, 0.35),
+          transparent 30%
+        ),
+        #080014;
+    }
 
-        header p {
-            font-size: 18px;
-            color: #6b7280;
-            margin-bottom: 35px;
-        }
+    .blob {
+      position: absolute;
+      width: 65vw;
+      height: 65vw;
+      max-width: 900px;
+      max-height: 900px;
 
-        .login-box {
-            max-width: 400px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-        }
+      border-radius: 45% 55% 60% 40%;
 
-        .login-box h2 {
-            margin-bottom: 20px;
-        }
+      background:
+        radial-gradient(
+          circle at 35% 30%,
+          #ffffff 0%,
+          #ff9ffc 12%,
+          #8d6cff 35%,
+          #5227ff 60%,
+          #160044 100%
+        );
 
-        input {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
+      filter: blur(25px);
 
-        button {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            background: #1f2937;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
+      opacity: 0.95;
 
-        button:hover {
-            background: #374151;
-        }
+      animation:
+        moltenMove 14s ease-in-out infinite alternate,
+        moltenRotate 22s linear infinite;
 
-        #error {
-            color: #dc2626;
-            margin-top: 15px;
-            display: none;
-        }
-    </style>
+      transform-origin: center;
+    }
+
+    .blob.one {
+      left: -15%;
+      top: -20%;
+    }
+
+    .blob.two {
+      right: -20%;
+      bottom: -25%;
+
+      width: 70vw;
+      height: 70vw;
+
+      animation-duration: 17s, 27s;
+      animation-delay: -5s, -10s;
+    }
+
+    .blob.three {
+      width: 40vw;
+      height: 40vw;
+
+      left: 30%;
+      top: 25%;
+
+      opacity: 0.5;
+
+      filter: blur(45px);
+
+      animation-duration: 20s, 30s;
+    }
+
+    @keyframes moltenMove {
+      0% {
+        transform: translate3d(-5%, -3%, 0) scale(1);
+      }
+
+      50% {
+        transform: translate3d(8%, 7%, 0) scale(1.12);
+      }
+
+      100% {
+        transform: translate3d(-3%, 10%, 0) scale(0.95);
+      }
+    }
+
+    @keyframes moltenRotate {
+      from {
+        rotate: 0deg;
+      }
+
+      to {
+        rotate: 360deg;
+      }
+    }
+
+    /* =========================
+       GRAIN EFFECT
+    ========================= */
+
+    .grain {
+      position: fixed;
+      inset: -50%;
+
+      pointer-events: none;
+
+      opacity: 0.07;
+
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+
+      animation: grainMove 0.25s steps(2) infinite;
+    }
+
+    @keyframes grainMove {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      25% {
+        transform: translate(3%, -2%);
+      }
+
+      50% {
+        transform: translate(-2%, 3%);
+      }
+
+      75% {
+        transform: translate(2%, 2%);
+      }
+
+      100% {
+        transform: translate(-3%, -3%);
+      }
+    }
+
+    /* =========================
+       DARK OVERLAY
+    ========================= */
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+
+      background:
+        radial-gradient(
+          circle,
+          transparent 20%,
+          rgba(0, 0, 0, 0.25) 100%
+        );
+
+      pointer-events: none;
+    }
+
+    /* =========================
+       LOGIN CARD
+    ========================= */
+
+    .container {
+      position: relative;
+      z-index: 10;
+
+      min-height: 100vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 420px;
+
+      padding: 45px 40px;
+
+      border-radius: 24px;
+
+      background: rgba(255, 255, 255, 0.13);
+
+      border: 1px solid rgba(255, 255, 255, 0.25);
+
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+
+      box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+      text-align: center;
+
+      color: white;
+    }
+
+    .logo {
+      font-size: 52px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      opacity: 0.85;
+      margin-bottom: 30px;
+    }
+
+    input {
+      width: 100%;
+
+      padding: 15px 18px;
+
+      border-radius: 12px;
+
+      border: 1px solid rgba(255, 255, 255, 0.25);
+
+      background: rgba(255, 255, 255, 0.12);
+
+      color: white;
+
+      font-size: 16px;
+
+      outline: none;
+
+      margin-bottom: 15px;
+
+      transition: 0.25s;
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    input:focus {
+      border-color: rgba(255, 255, 255, 0.7);
+
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    button {
+      width: 100%;
+
+      padding: 15px;
+
+      border: none;
+
+      border-radius: 12px;
+
+      background: white;
+
+      color: #5227ff;
+
+      font-size: 16px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      transition: all 0.25s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    .error {
+      margin-top: 15px;
+
+      color: #ffd6fa;
+
+      font-size: 14px;
+
+      display: none;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      .login-box {
+        padding: 35px 25px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .logo {
+        font-size: 45px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <div class="container">
+  <!-- Animated background -->
+  <div class="background">
 
-        <header>
-            <h1>English Courses</h1>
-            <p>Your online learning space</p>
-        </header>
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+    <div class="blob three"></div>
 
-        <div class="login-box">
-            <h2>Welcome 👋</h2>
+  </div>
 
-            <p style="margin-bottom: 20px;">
-                Enter your class password to access your courses.
-            </p>
+  <!-- Grain -->
+  <div class="grain"></div>
 
-            <input
-                type="password"
-                id="password"
-                placeholder="Enter password"
-            >
+  <!-- Dark overlay -->
+  <div class="overlay"></div>
 
-            <button onclick="login()">
-                Access my courses
-            </button>
 
-            <p id="error">
-                Incorrect password. Please try again.
-            </p>
-        </div>
+  <!-- LOGIN -->
+  <main class="container">
+
+    <div class="login-box">
+
+      <div class="logo">🇬🇧</div>
+
+      <h1>English Courses</h1>
+
+      <p class="subtitle">
+        Your online learning space
+      </p>
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter your class password"
+        autocomplete="off"
+      >
+
+      <button onclick="checkPassword()">
+        Access my courses →
+      </button>
+
+      <p id="error" class="error">
+        Incorrect password. Please try again.
+      </p>
 
     </div>
 
-    <script>
-        function login() {
+  </main>
 
-            const password = document.getElementById("password").value;
 
-            if (password === "ENGLISH2026") {
+  <script>
 
-                window.location.href = "classes.html";
+    function checkPassword() {
 
-            } else {
+      const password =
+        document.getElementById("password").value;
 
-                document.getElementById("error").style.display = "block";
+      const error =
+        document.getElementById("error");
 
-            }
+      /*
+        CHANGE YOUR PASSWORD HERE
+      */
+
+      const correctPassword = "ENGLISH2026";
+
+
+      if (password === correctPassword) {
+
+        window.location.href = "classes.html";
+
+      } else {
+
+        error.style.display = "block";
+
+      }
+
+    }
+
+
+    /* Allow ENTER key */
+
+    document
+      .getElementById("password")
+      .addEventListener("keypress", function(event) {
+
+        if (event.key === "Enter") {
+
+          checkPassword();
+
         }
-    </script>
+
+      });
+
+
+    /*
+      Subtle mouse interaction
+    */
+
+    document.addEventListener("mousemove", function(e) {
+
+      const x =
+        (e.clientX / window.innerWidth - 0.5) * 20;
+
+      const y =
+        (e.clientY / window.innerHeight - 0.5) * 20;
+
+      document.querySelector(".blob.one").style.transform =
+        `translate(${x}px, ${y}px)`;
+
+    });
+
+  </script>
 
 </body>
 </html>
