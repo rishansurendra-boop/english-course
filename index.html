@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,10 +8,9 @@
   <title>English Courses</title>
 
   <style>
-
-    /* =========================================
+    /* ==============================
        RESET
-    ========================================= */
+    ============================== */
 
     * {
       margin: 0;
@@ -18,343 +18,301 @@
       box-sizing: border-box;
     }
 
-    html,
-    body {
-      width: 100%;
-      min-height: 100%;
-    }
+    /* ==============================
+       PAGE
+    ============================== */
 
     body {
       min-height: 100vh;
       font-family: Arial, sans-serif;
-
       overflow: hidden;
-
-      background: #f7f9fc;
-
-      color: #0a2a66;
+      background: #080014;
     }
 
+    /* ==============================
+       ANIMATED BACKGROUND
+    ============================== */
 
-    /* =========================================
-       LIGHT DOT GRID BACKGROUND
-    ========================================= */
-
-    .dot-grid {
+    .background {
       position: fixed;
-
       inset: 0;
-
-      width: 100%;
-      height: 100%;
-
       overflow: hidden;
-
-      z-index: 0;
 
       background:
         radial-gradient(
-          circle at 50% 45%,
-          rgba(200, 16, 46, 0.05),
+          circle at 20% 30%,
+          rgba(82, 39, 255, 0.9),
           transparent 35%
         ),
-
         radial-gradient(
-          circle at 20% 20%,
-          rgba(10, 42, 102, 0.06),
+          circle at 80% 70%,
+          rgba(255, 159, 252, 0.8),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 50% 50%,
+          rgba(255, 255, 255, 0.35),
           transparent 30%
         ),
-
-        #f7f9fc;
+        #080014;
     }
 
+    /* ==============================
+       BACKGROUND BLOBS
+    ============================== */
 
-    #dotCanvas {
+    .blob {
       position: absolute;
 
-      inset: 0;
+      width: 65vw;
+      height: 65vw;
 
-      width: 100%;
-      height: 100%;
+      max-width: 900px;
+      max-height: 900px;
 
-      pointer-events: none;
+      border-radius: 45% 55% 60% 40%;
+
+      background:
+        radial-gradient(
+          circle at 35% 30%,
+          #ffffff 0%,
+          #ff9ffc 12%,
+          #8d6cff 35%,
+          #5227ff 60%,
+          #160044 100%
+        );
+
+      filter: blur(25px);
+      opacity: 0.95;
+
+      animation:
+        moltenMove 14s ease-in-out infinite alternate,
+        moltenRotate 22s linear infinite;
+
+      transform-origin: center;
     }
 
+    .blob.one {
+      left: -15%;
+      top: -20%;
+    }
 
-    /* =========================================
-       SOFT BRITISH GLOW
-    ========================================= */
+    .blob.two {
+      right: -20%;
+      bottom: -25%;
 
-    .glow-blue {
+      width: 70vw;
+      height: 70vw;
+
+      animation-duration: 17s, 27s;
+      animation-delay: -5s, -10s;
+    }
+
+    .blob.three {
+      left: 30%;
+      top: 25%;
+
+      width: 40vw;
+      height: 40vw;
+
+      opacity: 0.5;
+      filter: blur(45px);
+
+      animation-duration: 20s, 30s;
+    }
+
+    /* ==============================
+       BLOB ANIMATIONS
+    ============================== */
+
+    @keyframes moltenMove {
+      0% {
+        transform: translate3d(-5%, -3%, 0) scale(1);
+      }
+
+      50% {
+        transform: translate3d(8%, 7%, 0) scale(1.12);
+      }
+
+      100% {
+        transform: translate3d(-3%, 10%, 0) scale(0.95);
+      }
+    }
+
+    @keyframes moltenRotate {
+      from {
+        rotate: 0deg;
+      }
+
+      to {
+        rotate: 360deg;
+      }
+    }
+
+    /* ==============================
+       GRAIN / NOISE
+    ============================== */
+
+    .grain {
       position: fixed;
+      inset: -50%;
 
-      width: 650px;
-      height: 650px;
+      pointer-events: none;
 
-      left: -250px;
-      top: -250px;
+      opacity: 0.07;
 
-      border-radius: 50%;
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+
+      animation: grainMove 0.25s steps(2) infinite;
+    }
+
+    @keyframes grainMove {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      25% {
+        transform: translate(3%, -2%);
+      }
+
+      50% {
+        transform: translate(-2%, 3%);
+      }
+
+      75% {
+        transform: translate(2%, 2%);
+      }
+
+      100% {
+        transform: translate(-3%, -3%);
+      }
+    }
+
+    /* ==============================
+       DARK OVERLAY
+    ============================== */
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+
+      pointer-events: none;
 
       background:
         radial-gradient(
           circle,
-          rgba(10, 42, 102, 0.10),
-          transparent 70%
-        );
-
-      filter: blur(30px);
-
-      pointer-events: none;
-
-      z-index: 1;
-    }
-
-
-    .glow-red {
-      position: fixed;
-
-      width: 550px;
-      height: 550px;
-
-      right: -200px;
-      bottom: -200px;
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(200, 16, 46, 0.09),
-          transparent 70%
-        );
-
-      filter: blur(35px);
-
-      pointer-events: none;
-
-      z-index: 1;
-    }
-
-
-    /* =========================================
-       SUBTLE FLAG LINES
-    ========================================= */
-
-    .british-lines {
-      position: fixed;
-
-      inset: 0;
-
-      pointer-events: none;
-
-      z-index: 1;
-
-      opacity: 0.035;
-
-      background:
-
-        linear-gradient(
-          32deg,
-          transparent 47%,
-          #c8102e 48%,
-          #c8102e 52%,
-          transparent 53%
-        ),
-
-        linear-gradient(
-          -32deg,
-          transparent 47%,
-          #0a2a66 48%,
-          #0a2a66 52%,
-          transparent 53%
+          transparent 20%,
+          rgba(0, 0, 0, 0.25) 100%
         );
     }
 
-
-    /* =========================================
-       GLASS LOGIN CARD
-    ========================================= */
+    /* ==============================
+       LOGIN CONTAINER
+    ============================== */
 
     .container {
       position: relative;
-
       z-index: 10;
 
       min-height: 100vh;
 
       display: flex;
-
       align-items: center;
-
       justify-content: center;
 
       padding: 20px;
     }
 
+    /* ==============================
+       LOGIN CARD
+    ============================== */
 
     .login-box {
-      position: relative;
-
       width: 100%;
-
       max-width: 420px;
 
       padding: 45px 40px;
 
+      text-align: center;
+      color: white;
+
       border-radius: 24px;
 
-      /*
-        Light glass effect
-      */
+      background: rgba(255, 255, 255, 0.13);
 
-      background:
-        rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.25);
 
-      border:
-        1px solid rgba(10, 42, 102, 0.10);
-
-      backdrop-filter:
-        blur(20px);
-
-      -webkit-backdrop-filter:
-        blur(20px);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
 
       box-shadow:
-
-        0 25px 70px
-        rgba(10, 42, 102, 0.12),
-
-        0 5px 20px
-        rgba(10, 42, 102, 0.05),
-
-        inset 0 1px 0
-        rgba(255, 255, 255, 0.9);
-
-      text-align: center;
-
-      color: #0a2a66;
+        0 25px 70px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
     }
 
-
-    /* =========================================
-       SMALL RED LINE ON CARD
-    ========================================= */
-
-    .login-box::before {
-      content: "";
-
-      position: absolute;
-
-      top: 0;
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      width: 70px;
-      height: 4px;
-
-      border-radius:
-        0 0 10px 10px;
-
-      background: #c8102e;
-    }
-
-
-    /* =========================================
+    /* ==============================
        LOGO
-    ========================================= */
+    ============================== */
 
     .logo {
       font-size: 52px;
-
       margin-bottom: 15px;
-
-      filter:
-        drop-shadow(
-          0 4px 8px
-          rgba(10, 42, 102, 0.12)
-        );
     }
 
-
-    /* =========================================
+    /* ==============================
        TITLE
-    ========================================= */
+    ============================== */
 
     h1 {
-      font-size: 34px;
-
       margin-bottom: 10px;
 
+      font-size: 34px;
       letter-spacing: -1px;
-
-      color: #0a2a66;
     }
-
 
     .subtitle {
-      font-size: 16px;
-
-      color: #506080;
-
       margin-bottom: 30px;
+
+      font-size: 16px;
+      opacity: 0.85;
     }
 
-
-    /* =========================================
-       INPUT
-    ========================================= */
+    /* ==============================
+       PASSWORD INPUT
+    ============================== */
 
     input {
       width: 100%;
 
       padding: 15px 18px;
-
-      border-radius: 12px;
-
-      border:
-        1px solid
-        rgba(10, 42, 102, 0.15);
-
-      background:
-        rgba(247, 249, 252, 0.9);
-
-      color: #0a2a66;
+      margin-bottom: 15px;
 
       font-size: 16px;
+      color: white;
 
       outline: none;
 
-      margin-bottom: 15px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
 
-      transition:
-        border-color 0.25s ease,
-        box-shadow 0.25s ease,
-        background 0.25s ease;
+      background: rgba(255, 255, 255, 0.12);
+
+      transition: 0.25s;
     }
-
 
     input::placeholder {
-      color:
-        rgba(10, 42, 102, 0.45);
+      color: rgba(255, 255, 255, 0.65);
     }
-
 
     input:focus {
-      border-color: #0a2a66;
-
-      background: white;
-
-      box-shadow:
-        0 0 0 3px
-        rgba(10, 42, 102, 0.08);
+      border-color: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.18);
     }
 
-
-    /* =========================================
+    /* ==============================
        BUTTON
-    ========================================= */
+    ============================== */
 
     button {
       width: 100%;
@@ -362,928 +320,215 @@
       padding: 15px;
 
       border: none;
-
       border-radius: 12px;
 
-      background: #c8102e;
-
-      color: white;
+      background: white;
+      color: #5227ff;
 
       font-size: 16px;
-
-      font-weight: 700;
+      font-weight: bold;
 
       cursor: pointer;
 
-      transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        background 0.25s ease;
+      transition: all 0.25s ease;
     }
-
 
     button:hover {
-      transform:
-        translateY(-2px);
-
-      background:
-        #a90d27;
+      transform: translateY(-2px);
 
       box-shadow:
-        0 10px 25px
-        rgba(200, 16, 46, 0.25);
+        0 10px 25px rgba(0, 0, 0, 0.25);
     }
 
-
-    button:active {
-      transform:
-        translateY(0);
-    }
-
-
-    /* =========================================
-       ERROR
-    ========================================= */
+    /* ==============================
+       ERROR MESSAGE
+    ============================== */
 
     .error {
+      display: none;
+
       margin-top: 15px;
 
-      color: #c8102e;
+      color: #ffd6fa;
 
       font-size: 14px;
-
-      display: none;
     }
 
-
-    /* =========================================
-       SMALL FOOTER
-    ========================================= */
-
-    .footer-text {
-      margin-top: 25px;
-
-      font-size: 12px;
-
-      color:
-        rgba(10, 42, 102, 0.45);
-    }
-
-
-    /* =========================================
+    /* ==============================
        MOBILE
-    ========================================= */
+    ============================== */
 
     @media (max-width: 600px) {
 
       .login-box {
-        padding:
-          35px 25px;
+        padding: 35px 25px;
       }
-
 
       h1 {
         font-size: 28px;
       }
 
-
       .logo {
         font-size: 45px;
       }
-
     }
-
   </style>
-</head>
 
+</head>
 
 <body>
 
+  <!-- ==============================
+       BACKGROUND
+  ============================== -->
 
-  <!-- ========================================
-       DOT GRID
-  ========================================= -->
-
-  <div class="dot-grid">
-
-    <canvas id="dotCanvas"></canvas>
-
+  <div class="background">
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+    <div class="blob three"></div>
   </div>
 
+  <!-- Grain effect -->
 
-  <!-- Soft background effects -->
+  <div class="grain"></div>
 
-  <div class="glow-blue"></div>
+  <!-- Dark overlay -->
 
-  <div class="glow-red"></div>
+  <div class="overlay"></div>
 
-  <div class="british-lines"></div>
-
-
-  <!-- ========================================
+  <!-- ==============================
        LOGIN
-  ======================================== -->
+  ============================== -->
 
   <main class="container">
 
-    <div class="login-box">
+```
+<div class="login-box">
 
+  <!-- Logo -->
+  <div class="logo">🇬🇧</div>
 
-      <div class="logo">
-        🇬🇧
-      </div>
+  <!-- Title -->
+  <h1>English Courses</h1>
 
+  <!-- Subtitle -->
+  <p class="subtitle">
+    Your online learning space
+  </p>
 
-      <h1>
-        English Courses
-      </h1>
+  <!-- Password -->
+  <input
+    type="password"
+    id="password"
+    placeholder="Enter your class password"
+    autocomplete="off"
+  >
 
+  <!-- Access button -->
+  <button onclick="checkPassword()">
+    Access my courses →
+  </button>
 
-      <p class="subtitle">
-        Your online learning space
-      </p>
+  <!-- Error -->
+  <p id="error" class="error">
+    Incorrect password. Please try again.
+  </p>
 
-
-      <input
-        type="password"
-        id="password"
-        placeholder="Enter your class password"
-        autocomplete="off"
-      >
-
-
-      <button
-        onclick="checkPassword()"
-      >
-        Access my courses →
-      </button>
-
-
-      <p
-        id="error"
-        class="error"
-      >
-        Incorrect password. Please try again.
-      </p>
-
-
-      <p class="footer-text">
-        Learn • Practice • Improve
-      </p>
-
-
-    </div>
+</div>
+```
 
   </main>
 
-
-
-  <!-- ========================================
+  <!-- ==============================
        JAVASCRIPT
-  ======================================== -->
+  ============================== -->
 
   <script>
 
+    /*
+     * ==============================
+     * PASSWORD
+     * ==============================
+     *
+     * Change the password here.
+     */
 
-    /* =========================================
-       PASSWORD
-    ========================================= */
+    const correctPassword = "ENGLISH2026";
+
+
+    /*
+     * ==============================
+     * CHECK PASSWORD
+     * ==============================
+     */
 
     function checkPassword() {
 
+      const passwordInput =
+        document.getElementById("password");
+
+      const errorMessage =
+        document.getElementById("error");
+
       const password =
-        document.getElementById(
-          "password"
-        ).value;
+        passwordInput.value;
 
 
-      const error =
-        document.getElementById(
-          "error"
-        );
+      if (password === correctPassword) {
 
+        // Go to the classes page
+        window.location.href = "classes.html";
 
-      /*
-        CHANGE YOUR PASSWORD HERE
-      */
+      } else {
 
-      const correctPassword =
-        "ENGLISH2026";
+        // Show error
+        errorMessage.style.display = "block";
 
+        // Clear password
+        passwordInput.value = "";
 
-      if (
-        password ===
-        correctPassword
-      ) {
-
-        window.location.href =
-          "classes.html";
-
+        // Put cursor back in input
+        passwordInput.focus();
       }
-
-      else {
-
-        error.style.display =
-          "block";
-
-      }
-
     }
 
 
-
-    /* =========================================
-       ENTER KEY
-    ========================================= */
+    /*
+     * ==============================
+     * ENTER KEY
+     * ==============================
+     */
 
     document
       .getElementById("password")
-      .addEventListener(
-        "keydown",
-        function(event) {
+      .addEventListener("keypress", function(event) {
 
-          if (
-            event.key === "Enter"
-          ) {
-
-            checkPassword();
-
-          }
-
+        if (event.key === "Enter") {
+          checkPassword();
         }
-      );
 
-
-
-    /* =========================================
-       DOT GRID
-    ========================================= */
-
-    const canvas =
-      document.getElementById(
-        "dotCanvas"
-      );
-
-
-    const ctx =
-      canvas.getContext("2d");
+      });
 
 
     /*
-      DOT SETTINGS
-    */
+     * ==============================
+     * MOUSE INTERACTION
+     * ==============================
+     */
 
-    const dotSize = 3;
+    document.addEventListener("mousemove", function(event) {
 
-    const gap = 30;
+      const x =
+        (event.clientX / window.innerWidth - 0.5) * 20;
 
-    const proximity = 160;
+      const y =
+        (event.clientY / window.innerHeight - 0.5) * 20;
 
-    const shockRadius = 230;
 
-    const shockStrength = 12;
+      document.querySelector(".blob.one").style.transform =
+        `translate(${x}px, ${y}px)`;
 
-
-    /*
-      COLORS
-
-      Navy = British blue
-      Red  = British red
-    */
-
-    const baseColor = {
-
-      r: 10,
-      g: 42,
-      b: 102
-
-    };
-
-
-    const activeColor = {
-
-      r: 200,
-      g: 16,
-      b: 46
-
-    };
-
-
-    let dots = [];
-
-    let width = 0;
-
-    let height = 0;
-
-
-    /*
-      Mouse
-    */
-
-    const pointer = {
-
-      x: -1000,
-
-      y: -1000,
-
-      lastX: 0,
-
-      lastY: 0,
-
-      speed: 0
-
-    };
-
-
-
-    /* =========================================
-       BUILD GRID
-    ========================================= */
-
-    function buildGrid() {
-
-      const dpr =
-        window.devicePixelRatio ||
-        1;
-
-
-      width =
-        window.innerWidth;
-
-
-      height =
-        window.innerHeight;
-
-
-      canvas.width =
-        width * dpr;
-
-
-      canvas.height =
-        height * dpr;
-
-
-      canvas.style.width =
-        width + "px";
-
-
-      canvas.style.height =
-        height + "px";
-
-
-      ctx.setTransform(
-        dpr,
-        0,
-        0,
-        dpr,
-        0,
-        0
-      );
-
-
-      dots = [];
-
-
-      const cell =
-        dotSize + gap;
-
-
-      const cols =
-        Math.ceil(
-          width / cell
-        ) + 2;
-
-
-      const rows =
-        Math.ceil(
-          height / cell
-        ) + 2;
-
-
-      /*
-        Center the grid
-      */
-
-      const totalWidth =
-        cols * cell;
-
-
-      const totalHeight =
-        rows * cell;
-
-
-      const startX =
-        (width -
-          totalWidth) /
-        2;
-
-
-      const startY =
-        (height -
-          totalHeight) /
-        2;
-
-
-      for (
-        let y = 0;
-        y < rows;
-        y++
-      ) {
-
-        for (
-          let x = 0;
-          x < cols;
-          x++
-        ) {
-
-          dots.push({
-
-            x:
-              startX +
-              x * cell,
-
-            y:
-              startY +
-              y * cell,
-
-            offsetX: 0,
-
-            offsetY: 0,
-
-            velocityX: 0,
-
-            velocityY: 0
-
-          });
-
-        }
-
-      }
-
-    }
-
-
-
-    /* =========================================
-       MOUSE MOVEMENT
-    ========================================= */
-
-    document.addEventListener(
-      "mousemove",
-      function(event) {
-
-
-        const dx =
-          event.clientX -
-          pointer.lastX;
-
-
-        const dy =
-          event.clientY -
-          pointer.lastY;
-
-
-        pointer.speed =
-          Math.sqrt(
-            dx * dx +
-            dy * dy
-          );
-
-
-        pointer.x =
-          event.clientX;
-
-
-        pointer.y =
-          event.clientY;
-
-
-        pointer.lastX =
-          event.clientX;
-
-
-        pointer.lastY =
-          event.clientY;
-
-
-        /*
-          Push nearby dots
-        */
-
-        if (
-          pointer.speed > 4
-        ) {
-
-          dots.forEach(
-            dot => {
-
-
-              const dx =
-                dot.x -
-                pointer.x;
-
-
-              const dy =
-                dot.y -
-                pointer.y;
-
-
-              const distance =
-                Math.sqrt(
-                  dx * dx +
-                  dy * dy
-                );
-
-
-              if (
-                distance <
-                proximity
-              ) {
-
-
-                const force =
-                  (
-                    1 -
-                    distance /
-                    proximity
-                  ) *
-                  pointer.speed *
-                  0.08;
-
-
-                const angle =
-                  Math.atan2(
-                    dy,
-                    dx
-                  );
-
-
-                dot.velocityX +=
-                  Math.cos(
-                    angle
-                  ) *
-                  force;
-
-
-                dot.velocityY +=
-                  Math.sin(
-                    angle
-                  ) *
-                  force;
-
-              }
-
-            }
-          );
-
-        }
-
-      }
-    );
-
-
-
-    /* =========================================
-       MOUSE LEAVE
-    ========================================= */
-
-    document.addEventListener(
-      "mouseleave",
-      function() {
-
-        pointer.x =
-          -1000;
-
-        pointer.y =
-          -1000;
-
-      }
-    );
-
-
-
-    /* =========================================
-       CLICK SHOCKWAVE
-    ========================================= */
-
-    document.addEventListener(
-      "click",
-      function(event) {
-
-
-        /*
-          Don't trigger the
-          effect inside the login
-        */
-
-        if (
-          event.target.closest(
-            ".login-box"
-          )
-        ) {
-
-          return;
-
-        }
-
-
-        const clickX =
-          event.clientX;
-
-
-        const clickY =
-          event.clientY;
-
-
-        dots.forEach(
-          dot => {
-
-
-            const dx =
-              dot.x -
-              clickX;
-
-
-            const dy =
-              dot.y -
-              clickY;
-
-
-            const distance =
-              Math.sqrt(
-                dx * dx +
-                dy * dy
-              );
-
-
-            if (
-              distance <
-              shockRadius
-            ) {
-
-
-              const force =
-                (
-                  1 -
-                  distance /
-                  shockRadius
-                ) *
-                shockStrength;
-
-
-              const angle =
-                Math.atan2(
-                  dy,
-                  dx
-                );
-
-
-              dot.velocityX +=
-                Math.cos(
-                  angle
-                ) *
-                force;
-
-
-              dot.velocityY +=
-                Math.sin(
-                  angle
-                ) *
-                force;
-
-            }
-
-          }
-        );
-
-      }
-    );
-
-
-
-    /* =========================================
-       ANIMATION
-    ========================================= */
-
-    function animate() {
-
-
-      ctx.clearRect(
-        0,
-        0,
-        width,
-        height
-      );
-
-
-      dots.forEach(
-        dot => {
-
-
-          /*
-            Movement
-          */
-
-          dot.offsetX +=
-            dot.velocityX;
-
-
-          dot.offsetY +=
-            dot.velocityY;
-
-
-          /*
-            Spring
-          */
-
-          dot.velocityX +=
-            -dot.offsetX *
-            0.025;
-
-
-          dot.velocityY +=
-            -dot.offsetY *
-            0.025;
-
-
-          /*
-            Resistance
-          */
-
-          dot.velocityX *=
-            0.90;
-
-
-          dot.velocityY *=
-            0.90;
-
-
-          /*
-            Distance from mouse
-          */
-
-          const dx =
-            dot.x -
-            pointer.x;
-
-
-          const dy =
-            dot.y -
-            pointer.y;
-
-
-          const distance =
-            Math.sqrt(
-              dx * dx +
-              dy * dy
-            );
-
-
-          /*
-            Default navy
-          */
-
-          let r =
-            baseColor.r;
-
-
-          let g =
-            baseColor.g;
-
-
-          let b =
-            baseColor.b;
-
-
-          let size =
-            dotSize;
-
-
-          /*
-            Mouse interaction
-          */
-
-          if (
-            distance <
-            proximity
-          ) {
-
-
-            const intensity =
-              1 -
-              distance /
-              proximity;
-
-
-            /*
-              Navy → Red
-            */
-
-            r =
-              Math.round(
-                baseColor.r +
-                (
-                  activeColor.r -
-                  baseColor.r
-                ) *
-                intensity
-              );
-
-
-            g =
-              Math.round(
-                baseColor.g +
-                (
-                  activeColor.g -
-                  baseColor.g
-                ) *
-                intensity
-              );
-
-
-            b =
-              Math.round(
-                baseColor.b +
-                (
-                  activeColor.b -
-                  baseColor.b
-                ) *
-                intensity
-              );
-
-
-            size =
-              dotSize +
-              intensity * 3;
-
-          }
-
-
-          /*
-            Draw dot
-          */
-
-          ctx.beginPath();
-
-
-          ctx.arc(
-
-            dot.x +
-              dot.offsetX,
-
-            dot.y +
-              dot.offsetY,
-
-            size,
-
-            0,
-
-            Math.PI * 2
-
-          );
-
-
-          ctx.fillStyle =
-            `rgb(
-              ${r},
-              ${g},
-              ${b}
-            )`;
-
-
-          ctx.fill();
-
-        }
-      );
-
-
-      requestAnimationFrame(
-        animate
-      );
-
-    }
-
-
-
-    /* =========================================
-       RESIZE
-    ========================================= */
-
-    window.addEventListener(
-      "resize",
-      buildGrid
-    );
-
-
-
-    /* =========================================
-       START
-    ========================================= */
-
-    buildGrid();
-
-    animate();
-
+    });
 
   </script>
 
